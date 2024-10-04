@@ -1,0 +1,47 @@
+.main {
+    padding: 0;
+    margin: 0;
+    height: 47px;
+}
+
+.Nav {
+    height: 47px;
+}
+
+/* Common styling for all Nav links */
+.Nav .nav-link {
+    color: white; /* Text color */
+    padding: 10px 20px; /* Space around text */
+    transition: all 0.3s ease; /* Smooth transition */
+    transform: perspective(500px) translateZ(0); /* Flat starting point */
+}
+
+/* Hover effect to give a 3D "lift" */
+.Nav .nav-link:hover {
+    color: rgb(247, 86, 83); /* Change color on hover */
+    transform: perspective(500px) translateZ(10px); /* "Lift" effect */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4); /* Shadow for 3D effect */
+}
+
+
+
+
+.form-control {
+    background-color: #333; /* Dark background for search input */
+    color: white; /* White text color */
+    border: 1px solid #555; /* Border color */
+    height: 35px;
+    margin: 5px;
+}
+
+.form-control::placeholder {
+    color: #aaa; }
+
+Button {
+    margin-left: 5px; 
+    height: 35px;
+    margin-top: 5px;
+}
+#btn:hover{
+    background-color: rgb(243, 61, 58);
+}
