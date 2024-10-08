@@ -2,12 +2,12 @@ import React from "react";
 import '../css/Navbar.css';
 import { Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { FaSearch } from 'react-icons/fa';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import routerList from "../router/routerlist";
 function NavbarComponent() {
     return (
         <div className="main" >
-            <Nav variant="tabs" className="w-100 Nav">
+            <Nav variant="tabs" className="w-100 Nav sticky-top">
                 <Nav.Item className="ml-auto">
                     <Nav.Link disabled className="navbar-title p-1 ms-5 me-4 " ><h2>RateMovie</h2></Nav.Link>
                 </Nav.Item>
@@ -16,7 +16,7 @@ function NavbarComponent() {
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link as={Link} to={routerList.topRatedMovies}>Top Rating Movies</Nav.Link> {/* Use Link for navigation */}
-                </Nav.Item>               
+                </Nav.Item>
                 <Nav.Item>
                     <Nav.Link as={Link} to={routerList.lasterRelease}>Latest Releases</Nav.Link> {/* Use Link for navigation */}
                 </Nav.Item>
