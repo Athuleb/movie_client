@@ -7,7 +7,7 @@ import routerList from "../router/routerlist";
 function NavbarComponent() {
     return (
         <div className="main" >
-            <Nav variant="tabs" className="w-100 Nav sticky-top">
+            <Nav variant="tabs" className="w-100 Nav sticky-top pt-1 mb-1">
                 <Nav.Item className="ml-auto">
                     <Nav.Link disabled className="navbar-title p-1 ms-5 me-4 " ><h2>RateMovie</h2></Nav.Link>
                 </Nav.Item>

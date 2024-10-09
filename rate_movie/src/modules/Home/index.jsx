@@ -1,16 +1,42 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Carousel, Card, Button,Container,Row,Col } from 'react-bootstrap';
+import { Carousel, Card, Button, Container, Row, Col } from 'react-bootstrap';
 import kalki2898ad from '../../images/kalki2898ad.webp';
-import Kalki_2898_AD from '../../images/Kalki_2898_AD.jpg'
-import comedy from '../../images/comedy.jpeg'
 import action from '../../images/action.jpg'
 import './style.css';
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import axios from 'axios'
 
 
 function Home() {
+
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState('');
+  const movieIds = [3, 4, 5, 6, 7];
+  const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    const fetchAllMovies = async () => {
+      try {
+        const fetchedMovies = await Promise.all(
+          movieIds.map(async (id) => {
+            const response = await axios.get(`http://127.0.0.1:8000/api/movies/${id}`);
+            return response.data;
+          })
+        );
+        setMovies(fetchedMovies);
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to fetch movie data');
+        setLoading(false);
+      }
+    };
+
+    fetchAllMovies();
+  }, [movieIds]);
+
+
 
   return (
     <div style={{ backgroundColor: "rgba(50,50,50,0.5)", width: '100%', height: 'auto' }}>
@@ -22,15 +48,17 @@ function Home() {
           indicators={false}
           interval={5000}
         >
-          <Carousel.Item>
+
+
+          <Carousel.Item interval={1000}>
             <img
               className="d-block w-100"
               src={kalki2898ad}
-              alt="First slide"
+              alt="Second slide"
             />
             <Carousel.Caption>
-              <h3 style={{ fontFamily: 'fantasy' }}>Kalki 2898 AD</h3>
-              <p style={{ fontFamily: 'fantasy', fontWeight: 'bolder' }}>A modern avatar of the Hindu god Vishnu, is said to have descended on Earth to protect the world from evil forces.</p>
+              <h3>First slide label</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item interval={1000}>
@@ -59,95 +87,25 @@ function Home() {
       </div>
 
       <div className="cards">
-        <Card className="custom-card" >
-          <Card.Img variant="top" src={Kalki_2898_AD} />
-          <Card.Body style={{ display: 'grid', placeItems: 'center' }}>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="danger">Watch</Button>
-          </Card.Body>
-        </Card>
-        <Card className="custom-card" >
-          <Card.Img variant="top" src={Kalki_2898_AD} />
-          <Card.Body style={{ display: 'grid', placeItems: 'center' }}>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="danger">Watch</Button>
-          </Card.Body>
-        </Card>
-        <Card className="custom-card" >
-          <Card.Img variant="top" src={Kalki_2898_AD} />
-          <Card.Body style={{ display: 'grid', placeItems: 'center' }}>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="danger">Watch</Button>
-          </Card.Body>
-        </Card>
-        <Card className="custom-card" >
-          <Card.Img variant="top" src={Kalki_2898_AD} />
-          <Card.Body style={{ display: 'grid', placeItems: 'center' }}>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="danger">Watch</Button>
-          </Card.Body>
-        </Card>
-        <Card className="custom-card" >
-          <Card.Img variant="top" src={Kalki_2898_AD} />
-          <Card.Body style={{ display: 'grid', placeItems: 'center' }}>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="danger">Watch</Button>
-          </Card.Body>
-        </Card>
-        <Card className="custom-card" >
-          <Card.Img variant="top" src={Kalki_2898_AD} />
-          <Card.Body style={{ display: 'grid', placeItems: 'center' }}>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="danger">Watch</Button>
-          </Card.Body>
-        </Card>
-        <Card className="custom-card" >
-          <Card.Img variant="top" src={Kalki_2898_AD} />
-          <Card.Body style={{ display: 'grid', placeItems: 'center' }}>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="danger">Watch</Button>
-          </Card.Body>
-        </Card>
-        <Card className="custom-card" >
-          <Card.Img variant="top" src={Kalki_2898_AD} />
-          <Card.Body style={{ display: 'grid', placeItems: 'center' }}>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="danger">Watch</Button>
-          </Card.Body>
-        </Card>
+        {loading ? (
+          <p>Loading movies...</p>
+        ) : error ? (
+          <p>{error}</p>
+        ) : (
+          movies.map((movie) => (
+            <Card key={movie.id} className="custom-card">
+              <Card.Img variant="top" src={movie.poster_image || kalki2898ad} /> {/* Use the movie's poster image or a default */}
+              <Card.Body style={{ display: 'grid', placeItems: 'center' }}>
+                <Card.Title>{movie.title}</Card.Title>
+                <Card.Text>{movie.description || 'No description available.'}</Card.Text>
+                <Button variant="danger">Watch</Button>
+              </Card.Body>
+            </Card>
+          ))
+        )}
       </div>
+
+
 
 
       <div className="category">
@@ -322,37 +280,7 @@ function Home() {
             </Card.Body>
           </Card></div>
       </div>
-      <footer className="bg-dark text-white mt-5">
-        <Container>
-          <Row className="py-4">
-            <Col md={4} className="text-center text-md-left">
-              <h5>About Us</h5>
-              <p>We are dedicated to providing the best service to our customers.</p>
-            </Col>
-            <Col md={4} className="text-center">
-              <h5>Links</h5>
-              <ul className="list-unstyled">
-                <li><a href="#" className="text-white">Home</a></li>
-                <li><a href="#" className="text-white">About</a></li>
-                <li><a href="#" className="text-white">Services</a></li>
-                <li><a href="#" className="text-white">Contact</a></li>
-              </ul>
-            </Col>
-            <Col md={4} className="text-center text-md-right">
-              <h5>Follow Us</h5>
-              <a href="#" className="text-white mx-2"><FaFacebookF /></a>
-              <a href="#" className="text-white mx-2"><FaTwitter /></a>
-              <a href="#" className="text-white mx-2"><FaInstagram /></a>
-              <a href="#" className="text-white mx-2"><FaLinkedin /></a>
-            </Col>
-          </Row>
-          <Row>
-            <Col className="text-center">
-              <p className="mb-0">© {new Date().getFullYear()} Your Company. All rights reserved.</p>
-            </Col>
-          </Row>
-        </Container>
-      </footer>
+
     </div>
   );
 }

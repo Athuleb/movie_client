@@ -23,7 +23,7 @@ const route = createBrowserRouter([
                 path:routerList.topRatedMovies,
                 element:<TopRatedMovies/>
             },
-        ]
+        ],
     }
 ])
 

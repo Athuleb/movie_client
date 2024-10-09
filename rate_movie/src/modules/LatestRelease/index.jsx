@@ -1,9 +1,9 @@
 import React from 'react'
 
-function LatestReleases() {
+function index() {
   return (
-    <div style={{backgroundColor:"red"}}>LatestReleases</div>
+    <div>index</div>
   )
 }
 
-export default LatestReleases
+export default index

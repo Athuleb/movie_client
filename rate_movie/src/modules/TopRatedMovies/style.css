@@ -1,0 +1,59 @@
+.top {
+    width: 100%;
+    height: 100vh; /* Full height */
+    position: relative; /* Establish positioning context */
+    overflow: hidden; /* Ensure no overflow */
+}
+
+.background-image {
+    width: 100%; 
+    height: 100%; 
+    opacity: 60%;
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    z-index: 1; 
+}
+.overlay-text {
+    position: absolute; 
+    top: 70%; 
+    left: 35%; 
+    transform: translate(-50%, -50%); 
+    color: white; /* Text color */
+    font-size: 3rem; /* Adjust font size as needed */
+    z-index: 2; /* Bring text in front of the image */
+    text-align: center; /* Center the text */
+    font-family:  monospace;
+}
+
+.movie-cards{
+    flex: 0 0 calc(20% - 30px); 
+ overflow: hidden;
+    background-color: rgba(255, 255, 255,);
+    border-radius: 10px;
+    /* padding: 10px; */
+}
+.movie-cards img{
+    height: 20rem;
+
+}
+.cards{
+    height: auto;
+}
+.movie-cards .card-link {
+    text-decoration: none;
+    /* color: #f9f9f9;  */
+    text-decoration: none; 
+    font-weight: bold; 
+    transition: color 0.3s ease; 
+  }
+  
+  .movie-cards .card-link:hover {
+    color: #ef3a03; /* Darker color on hover */
+    text-decoration: none; /* Underline on hover */
+  }
+  
+  .movie-cards .card-link:active {
+    color: #003d7a; /* Even darker color when clicked */
+  }
+  
