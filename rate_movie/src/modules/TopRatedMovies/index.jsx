@@ -32,6 +32,11 @@ function Index() {
     })
     fetchMovies()
   }, [])
+  
+   const movieIds = movies.map(movie => movie.id);
+   console.log("All Movie IDs: ", movieIds);
+
+
   return (
     <div>
       <div className="top">
@@ -40,38 +45,29 @@ function Index() {
           Discover the finest cinematic experiences with our curated list of top-rated movies </p>
       </div>
 
-      {/* <div className="title" style={{color:'white'}}>
-        {movies.length > 0 ? (
-          movies.map((movie, index) => (
-            <p key={index}>Movie Title: {movie.title}</p> // Replace with your JSX
-          ))
-        ) : (
-          <p>Loading movies...</p>
-        )}
-      </div> */}
-
       <div className="cards ">
 
         {movies.length > 0 ? (
           movies.map((movie) => (
-            <Card key={movie.id} style={{ height:'43rem' }} className='movie-cards'>
+            <Card key={movie.id} style={{ height:'auto' }} className='movie-cards'>
               <Card.Body>
                 <Card.Title>{movie.title}</Card.Title>
                 <Card.Img src={movie.poster_image} />
                 <Card.Subtitle className="mb-2 text-muted">{movie.subtitle || 'No subtitle'}</Card.Subtitle>
                 <Card.Text>{movie.info || 'No info available'}</Card.Text>
-                <Card.Link className='card-link' href={`https://www.youtube.com/results?search_query=${encodeURIComponent(movie.title)}`}
+                <Card.Link className='card-link' href={`https://www.youtube.com/results?search_query=${encodeURIComponent(movie.title)}trailer`}
                   target="_blank"
                   rel="noopener noreferrer">Watch Trailer</Card.Link>
+                  
               </Card.Body>
             </Card>
+
           ))
         ) : (
           <p>Loading...</p>
         )}
-
-
       </div>
+ 
     </div>
   );
 }
